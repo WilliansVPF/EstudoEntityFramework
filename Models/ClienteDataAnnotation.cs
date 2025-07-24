@@ -5,7 +5,7 @@ namespace EstudoEntityFramework.Models;
 
 //* configurando a classe usando Data Annotations
 
-[Table("clientes")] //? nomeia a tabela. Caso não seja indicado um nome, a tabela tera o mesmo nome da classe no plural (Cliente = Clientes)
+[Table("clientesDataAnnotation")] //? nomeia a tabela. Caso não seja indicado um nome, a tabela tera o mesmo nome da classe no plural (Cliente = Clientes)
 public class ClienteDataAnnotation
 {
     [Key] //? Indica que essa propriedade representa uma chave primaria. Por padrão, propriedades com nome Id ou NomeDaClasseId, são definidas automaticamente como primarias
