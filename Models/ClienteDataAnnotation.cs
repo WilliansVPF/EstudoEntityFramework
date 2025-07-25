@@ -16,6 +16,11 @@ public class ClienteDataAnnotation
     [MaxLength(100)] //? Define quantidade maxima de caracters. Pode ser usado para validação
     public string Nome { get; set; } = string.Empty;
 
-    [Column("cpf" , TypeName = "nvarchar(15)")] //? TypeName define qual vai ser o tipo do dado
+    [Column("cpf", TypeName = "nvarchar(15)")] //? TypeName define qual vai ser o tipo do dado
     public string Cpf { get; set; } = string.Empty;
+
+    public override string ToString()
+    {
+        return $"{Id}: {Nome} - {Cpf}";
+    }
 }
