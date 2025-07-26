@@ -7,8 +7,8 @@ public class Pedido
     public DateTime Data { get; set; }
 
     public int ClienteTypeConfigurationId { get; set; }
-    public ClienteTypeConfiguration Cliente { get; set; } = null!; //? propriedade de navegação
+    public virtual ClienteTypeConfiguration Cliente { get; set; } = null!; //? propriedade de navegação
 
-    public ICollection<Produto> Produtos { get; set; } = new List<Produto>();
+    public virtual ICollection<Produto> Produtos { get; set; } = new List<Produto>();
 
 }

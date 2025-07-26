@@ -6,5 +6,5 @@ public class Produto
     public string Nome { get; set; } = string.Empty;
     public decimal Valor { get; set; }
 
-    public ICollection<Pedido> Pedidos { get; set; } = new List<Pedido>();
+    public virtual ICollection<Pedido> Pedidos { get; set; } = new List<Pedido>();
 }
