@@ -92,20 +92,58 @@ var db = new AppDbContext(); //? instancia do DbContext
 // db.Add(endereco1);
 // db.SaveChanges();
 
-var cliente10 = new ClienteTypeConfiguration //? cadastro atravez da classe cliente
-{
-    Nome = "Marcos",
-    Cpf = "382.988.908-56",
+// var cliente10 = new ClienteTypeConfiguration //? cadastro atravez da classe cliente
+// {
+//     Nome = "Marcos",
+//     Cpf = "382.988.908-56",
 
-    Endereco = new Endereco //? passando os dados de endereço atravez de um objeto usando a propriedade de navegação
-    {
-        Estado = "SP",
-        Cidade = "Araraquara",
-        Bairro = "Vila Jose Bonifacio",
-        Logradouro = "Rua Tupi",
-        Numero = "378"
-    }
-};
+//     Endereco = new Endereco //? passando os dados de endereço atravez de um objeto usando a propriedade de navegação
+//     {
+//         Estado = "SP",
+//         Cidade = "Araraquara",
+//         Bairro = "Vila Jose Bonifacio",
+//         Logradouro = "Rua Tupi",
+//         Numero = "378"
+//     }
+// };
 
-db.Add(cliente10);
-db.SaveChanges();
+// db.Add(cliente10);
+// db.SaveChanges();
+
+// //* cadastro de entidadedes com relacionamento 1:N
+// var cliente11 = db.ClienteTypeConfigurations.First(); //? busca registro de cliente e monitora aterações
+// cliente11.Pedidos.Add(new Pedido //Todo cria um registro de pedido atravez da prop de navegação da classe cliente
+// {
+//     Descricao = "Meu primeiro pedido",
+//     Data = DateTime.Now
+// });
+
+// cliente11.Pedidos.Add(new Pedido //todo como é um relacionamento 1:N, pode haver mais de um registro de pedidos para um unico cliente
+// {
+//     Descricao = "Meu segundo pedido",
+//     Data = DateTime.Now
+// });
+
+// db.SaveChanges(); //? como o registro esta sendo monitorado, pode apenas salvar as alterações
+
+
+// var pedido = new Pedido //todo cadastra um registro atravez de um objeto da classe pedido
+// {
+//     Descricao = "Meu terceiro pedido",
+//     Data = DateTime.Now,
+//     ClienteTypeConfigurationId = 1 //? passa o id do cliente
+// };
+
+// db.Add(pedido);
+// db.SaveChanges();
+
+// var cliente12 = db.ClienteTypeConfigurations.First(); //? primeiro faz uma busca de cliente
+// var pedido2 = new Pedido
+// {
+//     Descricao = "Meu quarto pedido",
+//     Data = DateTime.Now,
+//     Cliente = cliente12 //? passa o retorno da busca para a propriedade de navegação
+// };
+
+// db.Add(pedido2);
+// db.SaveChanges();
