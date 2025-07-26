@@ -13,7 +13,9 @@ public class AppDbContext : DbContext
     public DbSet<Produto> Produtos => Set<Produto>();
     protected override void OnConfiguring(DbContextOptionsBuilder options) //? configuração de conexão
     {
-        options.UseSqlServer("Server=localhost,1433;Database=EstudoEFCore;User Id=sa;Password=Root@1234;TrustServerCertificate=True;"); //? string de conexão
+        options
+            .UseLazyLoadingProxies() //? configuração para usar o Lazy loading
+            .UseSqlServer("Server=localhost,1433;Database=EstudoEFCore;User Id=sa;Password=Root@1234;TrustServerCertificate=True;"); //? string de conexão
     }
 
     protected override void OnModelCreating(ModelBuilder builder) //? chama a classe de configuração usando IEntityTypeConfiguration
