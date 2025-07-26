@@ -10,5 +10,10 @@ namespace EstudoEntityFramework.Models
         public string Numero { get; set; } = string.Empty;
 
         public int ClienteTypeConfigurationId { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Estado} - {Cidade} - {Bairro}";
+        }
 	}
 }

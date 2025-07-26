@@ -13,4 +13,9 @@ public class ClienteTypeConfiguration
     public Endereco Endereco { get; set; } = null!; //? propriedade de navegação para poder acessar endereço pela classe cliente
 
     public ICollection<Pedido> Pedidos { get; set; } = new List<Pedido>(); //? propriedade de navegação para pedido. Como é um relacionamento 1:N, sera uma coleção de pedidos
+
+    public override string ToString()
+    {
+        return $"{Id}: {Nome} - {Cpf}";
+    }
 }
