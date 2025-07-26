@@ -147,3 +147,29 @@ var db = new AppDbContext(); //? instancia do DbContext
 
 // db.Add(pedido2);
 // db.SaveChanges();
+
+// //* cadastrando registros com relacionamento N:N
+// var produto = db.Produtos.First();
+// var produto2 = db.Produtos.Find(3);
+// var pedido3 = db.Pedidos.First();
+
+// pedido3.Produtos.Add(produto);
+// pedido3.Produtos.Add(produto2);
+// db.SaveChanges();
+
+//* Busca usando Eager loading. Carregamento adiantado, onde na hora da busca, os dados das tabelas relacionadas já são carregados
+var cliente13 = db.ClienteTypeConfigurations
+                .Include(cliente => cliente.Endereco) //? inclie os dados de endereço
+                .Include(cliente => cliente.Pedidos) //? é possivel concatenar varios Includes
+                .ThenInclude(pedido => pedido.Produtos) //? Cliente não possui uma navegação para Produtos, mas é possivel buscar produtos atravez da propriedade de navegação pedidos que esta em cliente
+                .First();
+
+Console.WriteLine(cliente13);
+Console.WriteLine(cliente13.Endereco);
+Console.WriteLine(cliente13.Pedidos.Count);
+Console.WriteLine(cliente13.Pedidos.Where(pedido => pedido.Id == 1).FirstOrDefault().Produtos.Count);
+
+
+//* Busca usando Explicit loading. Funciona da mesma maneira que a Eager loading
+
+//* Busca usando Lazy loading. Carregamento sobre demanda. Busca os dados da tabela que esta sendo buscada e quando solicitar os dados das tabelas relacionadas, uma busca é feita de forma automatica
