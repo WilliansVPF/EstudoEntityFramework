@@ -157,19 +157,35 @@ var db = new AppDbContext(); //? instancia do DbContext
 // pedido3.Produtos.Add(produto2);
 // db.SaveChanges();
 
-//* Busca usando Eager loading. Carregamento adiantado, onde na hora da busca, os dados das tabelas relacionadas já são carregados
-var cliente13 = db.ClienteTypeConfigurations
-                .Include(cliente => cliente.Endereco) //? inclie os dados de endereço
-                .Include(cliente => cliente.Pedidos) //? é possivel concatenar varios Includes
-                .ThenInclude(pedido => pedido.Produtos) //? Cliente não possui uma navegação para Produtos, mas é possivel buscar produtos atravez da propriedade de navegação pedidos que esta em cliente
-                .First();
+// //* Busca usando Eager loading. Carregamento adiantado, onde na hora da busca, os dados das tabelas relacionadas já são carregados
+// var cliente13 = db.ClienteTypeConfigurations
+//                 .Include(cliente => cliente.Endereco) //? inclie os dados de endereço
+//                 .Include(cliente => cliente.Pedidos) //? é possivel concatenar varios Includes
+//                 .ThenInclude(pedido => pedido.Produtos) //? Cliente não possui uma navegação para Produtos, mas é possivel buscar produtos atravez da propriedade de navegação pedidos que esta em cliente
+//                 .First();
 
-Console.WriteLine(cliente13);
-Console.WriteLine(cliente13.Endereco);
-Console.WriteLine(cliente13.Pedidos.Count);
-Console.WriteLine(cliente13.Pedidos.Where(pedido => pedido.Id == 1).FirstOrDefault().Produtos.Count);
+// Console.WriteLine(cliente13);
+// Console.WriteLine(cliente13.Endereco);
+// Console.WriteLine(cliente13.Pedidos.Count);
+// Console.WriteLine(cliente13.Pedidos.Where(pedido => pedido.Id == 1).FirstOrDefault().Produtos.Count);
 
 
-//* Busca usando Explicit loading. Funciona da mesma maneira que a Eager loading
+// //* Busca usando Explicit loading. Funciona da mesma maneira que a Eager loading
+// var cliente14 = db.ClienteTypeConfigurations.First();
+// db.Entry(cliente14).Reference(cliente => cliente.Endereco).Load();
+// db.Entry(cliente14).Collection(cliente => cliente.Pedidos).Load();
+
+// Console.WriteLine(cliente14);
+// Console.WriteLine(cliente14.Endereco);
+// Console.WriteLine(cliente14.Pedidos.Count);
 
 //* Busca usando Lazy loading. Carregamento sobre demanda. Busca os dados da tabela que esta sendo buscada e quando solicitar os dados das tabelas relacionadas, uma busca é feita de forma automatica
+//! necessita da biblioteca Microsoft.EntityFrameworkCore.Proxies, configuração no DbContext, e as propriedades de navegação precisam ser virtual
+//? dependedo se o privider não for oficial da microsoft, pode dar funcionar corretamente
+
+var cliente15 = db.ClienteTypeConfigurations.First();
+Console.WriteLine(cliente15);
+Console.WriteLine(cliente15.Endereco);
+Console.WriteLine(cliente15.Pedidos.Count);
+Console.WriteLine(cliente15.Pedidos.Where(pedido => pedido.Id == cliente15.Id).FirstOrDefault().Produtos.Count);
+
